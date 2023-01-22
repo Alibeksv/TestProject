@@ -14,8 +14,8 @@ class BookHandlerService
         $returnData = [];
         if (isset($data['data'])) {
             $returnData = $this->bookService1($data['data']);
+            unset($data['data']);
         }
-        unset($data['data']);
 
         if (count($data) != 0) {
             $returnData = array_merge($returnData, $this->bookService2($data));
