@@ -7,17 +7,18 @@ class BookHandlerService
     public function __construct(){}
     public function handler($data): array
     {
-        if (!is_array($data))
-        {
+        if (!is_array($data)) {
             throw new \Exception('Request data must be in array type');
         }
 
         $returnData = [];
         if (isset($data['data'])) {
-            $returnData[] = $this->bookService1($data['data']);
+            $returnData = $this->bookService1($data['data']);
         }
-        else {
-            $returnData[] = $this->bookService2($data);
+        unset($data['data']);
+
+        if (count($data) != 0) {
+            $returnData = array_merge($returnData, $this->bookService2($data));
         }
 
         return $returnData;
